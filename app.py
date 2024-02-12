@@ -24,7 +24,7 @@ for dir in directory:
 
 app = ctk.CTk()
 app.geometry("500x200")
-app.title("Mechanik - v1.5.0")
+app.title(f"Mechanik - {update.current_version}")
 app.iconbitmap("./assets/icon.ico")
 ctk.set_appearance_mode("Dark")
 
