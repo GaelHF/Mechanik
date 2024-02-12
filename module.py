@@ -1,8 +1,5 @@
-import pygame
 import os
-import keyboard
-
-pygame.init()
+import pygame
 
 def play(sound_path): 
     pygame.mixer.init()

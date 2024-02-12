@@ -4,15 +4,17 @@ import keyboard
 import pygame
 import json
 
-import module
 import update
+import module
 
 
+#Varibables
 directory = module.get_directory_names("./audios")
 keyboards = []
 current_keyboard = "eg-oreo"
 current_keyboard_name = "EG-Oreo"
 
+#APP
 for dir in directory:
     with open(f"{dir}/config.json", "r") as f:
         data = json.loads(f.read())
