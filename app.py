@@ -94,7 +94,8 @@ def change_keyboard():
 change_button = ctk.CTkButton(app, text="Change Keyboard", command=change_keyboard).pack(padx=60, pady=3)
 
 if update.is_update_available():
-    current_keyboard_label = ctk.CTkLabel(master=app, text=f"An update is available ! ({update.get_new_version()})", width=20)
+    new_version = ctk.CTkLabel(master=app, text=f"An update is available ! ({update.get_new_version()})", width=20)
+    new_version.pack(side="top", padx=(10, 10), pady=(10, 10))
 
 
 pygame.init() 

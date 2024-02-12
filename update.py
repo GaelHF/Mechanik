@@ -2,22 +2,23 @@ import requests
 import json
 
 current_version = "v1.5.0"
-current_version = current_version.replace("v", "")
-current_version = current_version.replace(".", "")
+current_version_m = current_version.replace("v", "")
+current_version_m = current_version_m.replace(".", "")
 
 request = requests.get("https://api.github.com/repos/gaelhf/mechanik/releases/latest")
 data = request.content
 data = json.loads(data)
 
 version = data["tag_name"]
-version = version.replace("v", "")
-version = version.replace(".", "")
+
+version_m = version.replace(".", "")
+version_m = version_m.replace("v", "")
 
 def is_update_available():
-    if int(version) > int(current_version):
+    if int(version_m) > int(current_version_m):
         return True
     else:
         return False
 
 def get_new_version():
-    return int(version)
+    return str(version)
