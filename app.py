@@ -2,8 +2,10 @@ import tkinter as tk
 import customtkinter as ctk
 import keyboard
 import pygame
-import module
 import json
+
+import module
+import update
 
 
 directory = module.get_directory_names("./audios")
@@ -20,7 +22,7 @@ for dir in directory:
 
 app = ctk.CTk()
 app.geometry("500x200")
-app.title("Mechanik - v1.0.0")
+app.title("Mechanik - v1.5.0")
 app.iconbitmap("./assets/icon.ico")
 ctk.set_appearance_mode("Dark")
 
@@ -90,6 +92,11 @@ def change_keyboard():
     current_keyboard_label.pack(side="top", padx=(10, 10), pady=(10, 10))
 
 change_button = ctk.CTkButton(app, text="Change Keyboard", command=change_keyboard).pack(padx=60, pady=3)
+
+if update.is_update_available():
+    current_keyboard_label = ctk.CTkLabel(master=app, text=f"An update is available ! ({update.get_new_version()})", width=20)
+
+
 pygame.init() 
 module.welcome()
 def on_pressed(e):
