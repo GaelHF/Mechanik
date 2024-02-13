@@ -3,6 +3,8 @@ import customtkinter as ctk
 import keyboard
 import pygame
 import json
+import os
+import webbrowser
 
 import update
 import module
@@ -13,6 +15,7 @@ directory = module.get_directory_names("./audios")
 keyboards = []
 current_keyboard = "eg-oreo"
 current_keyboard_name = "EG-Oreo"
+current_key = 0
 
 #APP
 for dir in directory:
@@ -92,23 +95,31 @@ def change_keyboard():
         
     current_keyboard_label.configure(text="Current Keyboard : " + current_keyboard_name)
     current_keyboard_label.pack(side="top", padx=(10, 10), pady=(10, 10))
-
 change_button = ctk.CTkButton(app, text="Change Keyboard", command=change_keyboard).pack(padx=60, pady=3)
 
 if update.is_update_available():
-    new_version = ctk.CTkLabel(master=app, text=f"An update is available ! ({update.get_new_version()})", width=20)
+    link_font = ctk.CTkFont(family="underline, bold", underline=True, weight="bold")
+    new_version = ctk.CTkLabel(master=app, text=f"An update is available ! ({update.get_new_version()})", width=20, text_color="cyan", fg_color="#2E2E2E", corner_radius=15, font=link_font)
+    new_version.bind("<Button-1>", lambda e:webbrowser.open_new_tab("https://github.com/GaelHF/Mechanik/releases/latest"))
     new_version.pack(side="top", padx=(10, 10), pady=(10, 10))
+    link_font.configure(family="url_font")
 
 
-pygame.init() 
+pygame.init()
+os.system("pip install customtkinter")
+os.system("pip install pygame")
+os.system("pip install requests")
 module.welcome()
 def on_pressed(e):
-    if keyboard.is_pressed("ctrl") or keyboard.is_pressed("alt") or keyboard.is_pressed("shift") or keyboard.is_pressed("tab") or keyboard.is_pressed("enter") or keyboard.is_pressed("command") or keyboard.is_pressed("backspace") or keyboard.is_pressed("return"):
-        module.play(f"./audios/{str(current_keyboard)}/big_key.ogg")
-    elif keyboard.is_pressed("space"):
-        module.play(f"./audios/{str(current_keyboard)}/space.ogg")
-    else:
-        module.play(f"./audios/{str(current_keyboard)}/key.ogg")
+    global current_key
+    if not int(e.scan_code) == current_key:
+        current_key = int(e.scan_code)
+        if keyboard.is_pressed("ctrl") or keyboard.is_pressed("alt") or keyboard.is_pressed("shift") or keyboard.is_pressed("tab") or keyboard.is_pressed("enter") or keyboard.is_pressed("command") or keyboard.is_pressed("backspace") or keyboard.is_pressed("return"):
+            module.play(f"./audios/{str(current_keyboard)}/big_key.ogg")
+        elif keyboard.is_pressed("space"):
+            module.play(f"./audios/{str(current_keyboard)}/space.ogg")
+        else:
+            module.play(f"./audios/{str(current_keyboard)}/key.ogg")
 keyboard.on_press(on_pressed)
 app.mainloop()
 keyboard.wait()

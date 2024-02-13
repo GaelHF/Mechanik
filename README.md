@@ -27,11 +27,5 @@ Go to the project directory
 Install library
 
 ```bash
-  execute Run.cmd
-```
-
-or
-
-```bash
-  pip install -r packages.txt
+  py app.py
 ```
