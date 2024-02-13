@@ -1,9 +1,13 @@
+import os
+os.system("pip install customtkinter")
+os.system("pip install pygame")
+os.system("pip install requests")
+
 import tkinter as tk
 import customtkinter as ctk
 import keyboard
 import pygame
 import json
-import os
 import webbrowser
 
 import update
@@ -106,9 +110,6 @@ if update.is_update_available():
 
 
 pygame.init()
-os.system("pip install customtkinter")
-os.system("pip install pygame")
-os.system("pip install requests")
 module.welcome()
 def on_pressed(e):
     global current_key
