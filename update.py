@@ -1,7 +1,7 @@
 import requests
 import json
 
-current_version = "v2.0.0"
+current_version = "v2.5.0"
 current_version_m = current_version.replace("v", "")
 current_version_m = current_version_m.replace(".", "")
 
