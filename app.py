@@ -30,7 +30,7 @@ for dir in directory:
 
 
 app = ctk.CTk()
-app.geometry("500x200")
+app.geometry("500x250")
 app.title(f"Mechanik - {update.current_version}")
 app.iconbitmap("./assets/icon.ico")
 ctk.set_appearance_mode("Dark")
@@ -100,6 +100,20 @@ def change_keyboard():
     current_keyboard_label.configure(text="Current Keyboard : " + current_keyboard_name)
     current_keyboard_label.pack(side="top", padx=(10, 10), pady=(10, 10))
 change_button = ctk.CTkButton(app, text="Change Keyboard", command=change_keyboard).pack(padx=60, pady=3)
+
+
+def volu(value):
+    module.volume(value)
+
+credit = ctk.CTkLabel(master=app, text="Volume : ", width=20)
+credit.pack(side="top", padx=(10, 10), pady=(10, 10))
+
+volume = ctk.CTkSlider(app, from_= 0, to= 100, command=volu)
+volume.pack(side="top", padx=(10, 10), pady=(10, 10))
+
+
+credit = ctk.CTkLabel(master=app, text="Made by: @GaelHF", width=20)
+credit.pack(side="top", padx=(10, 10), pady=(10, 10))
 
 if update.is_update_available():
     link_font = ctk.CTkFont(family="underline, bold", underline=True, weight="bold")
