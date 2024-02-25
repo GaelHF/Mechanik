@@ -1,4 +1,5 @@
 import os
+import sys
 os.system("pip install customtkinter")
 os.system("pip install pygame")
 os.system("pip install requests")
@@ -30,7 +31,7 @@ for dir in directory:
 
 
 app = ctk.CTk()
-app.geometry("500x250")
+app.geometry("500x300")
 app.title(f"Mechanik - {update.current_version}")
 app.iconbitmap("./assets/icon.ico")
 ctk.set_appearance_mode("Dark")
@@ -115,6 +116,8 @@ volume.pack(side="top", padx=(10, 10), pady=(10, 10))
 credit = ctk.CTkLabel(master=app, text="Made by: @GaelHF", width=20)
 credit.pack(side="top", padx=(10, 10), pady=(10, 10))
 
+close_button = ctk.CTkButton(app, text="Close", command=lambda:sys.exit()).pack(padx=60, pady=3)
+
 if update.is_update_available():
     link_font = ctk.CTkFont(family="underline, bold", underline=True, weight="bold")
     new_version = ctk.CTkLabel(master=app, text=f"An update is available ! ({update.get_new_version()})", width=20, text_color="cyan", fg_color="#2E2E2E", corner_radius=15, font=link_font)
@@ -139,3 +142,4 @@ keyboard.on_press(on_pressed)
 app.mainloop()
 keyboard.wait()
 pygame.quit()
+sys.exit()
